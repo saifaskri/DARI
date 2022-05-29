@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -52,6 +54,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 255)]
     private $Gender;
+
+    #[ORM\OneToMany(mappedBy: 'OwnedBy', targetEntity: Advertisment::class)]
+    private $advertisments;
+
+    public function __construct()
+    {
+        $this->advertisments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -227,6 +237,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setGender(string $Gender): self
     {
         $this->Gender = $Gender;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Advertisment>
+     */
+    public function getAdvertisments(): Collection
+    {
+        return $this->advertisments;
+    }
+
+    public function addAdvertisment(Advertisment $advertisment): self
+    {
+        if (!$this->advertisments->contains($advertisment)) {
+            $this->advertisments[] = $advertisment;
+            $advertisment->setOwnedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdvertisment(Advertisment $advertisment): self
+    {
+        if ($this->advertisments->removeElement($advertisment)) {
+            // set the owning side to null (unless already changed)
+            if ($advertisment->getOwnedBy() === $this) {
+                $advertisment->setOwnedBy(null);
+            }
+        }
 
         return $this;
     }
