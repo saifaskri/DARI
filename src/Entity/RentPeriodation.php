@@ -28,7 +28,10 @@ class RentPeriodation
     {
         $this->advertisments = new ArrayCollection();
     }
-
+    public function __toString()
+    {
+        return $this->getRentPeriodationName();
+    }
     public function getId(): ?int
     {
         return $this->id;

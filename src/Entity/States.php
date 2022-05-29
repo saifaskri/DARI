@@ -28,7 +28,10 @@ class States
     {
         $this->advertisments = new ArrayCollection();
     }
-
+    public function __toString()
+    {
+        return $this->getNameState();
+    }
     public function getId(): ?int
     {
         return $this->id;
