@@ -7,6 +7,7 @@ use App\Entity\Advertisment;
 use App\Entity\User;
 
 use DateTime;
+use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityDeletedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -28,17 +29,18 @@ class EasyAdminSubscriber implements EventSubscriberInterface
             BeforeEntityPersistedEvent::class=>['CreatedAt'],
             BeforeEntityUpdatedEvent::class=>['UpdatedAt'],
 
+
+
+
         ];
     }
+
 
     public function CreatedAt (BeforeEntityPersistedEvent $event)
     {
         $entityInstance = $event->getEntityInstance();
-
         if (!(($entityInstance instanceof Advertisment)||($entityInstance instanceof User)))return;
         $entityInstance->setCreatedAt( new DateTime() );
-
-
     }
 
     public function UpdatedAt (BeforeEntityUpdatedEvent $event)
