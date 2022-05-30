@@ -63,6 +63,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->advertisments = new ArrayCollection();
     }
 
+
     public function getId(): ?int
     {
         return $this->id;

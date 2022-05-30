@@ -39,7 +39,9 @@ class RegistrationFormType extends AbstractType
                     'Other' => 'Other',
                 ],
             ])
-            ->add('tel',TelType::class)
+            ->add('tel',TelType::class,[
+                'required'   => false,
+            ])
             ->add('BirthDay',BirthdayType::class,[
                 'required'   => true,
             ])

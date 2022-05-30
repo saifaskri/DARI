@@ -29,6 +29,11 @@ class AccomodationType
         $this->advertisments = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getAccomodationTypeName();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
