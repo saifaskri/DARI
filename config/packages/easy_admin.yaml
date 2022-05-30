@@ -1,4 +1,0 @@
-easy_admin:
-  entities:
-    User:
-      actions: ['-new','-delete']

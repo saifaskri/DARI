@@ -6,6 +6,7 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
@@ -34,9 +35,16 @@ class UserCrudController extends AbstractCrudController
         return $actions
             ->disable(Action::NEW)
             ->disable(Action::DELETE)
+            ->setPermission(Action::EDIT, 'ROLE_SUPER_ADMIN')
             ;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->showEntityActionsInlined()
+            ;
+    }
 
     public function configureFields(string $pageName): iterable
     {
@@ -45,7 +53,7 @@ class UserCrudController extends AbstractCrudController
                 ->setDisabled()
                 ->hideOnForm(),
             EmailField::new('email')
-            ->setDisabled(),
+                ->setDisabled(),
             TextField::new('firstname')
                 ->setDisabled(),
             TextField::new('lastname')
@@ -89,7 +97,7 @@ class UserCrudController extends AbstractCrudController
 
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        if (($entityInstance instanceof User) && ($entityInstance === $this->getUser()))
+        if ($entityInstance instanceof User)
         parent::updateEntity($entityManager, $entityInstance);
     }
 

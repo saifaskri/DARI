@@ -37,14 +37,15 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('DARI');
+            ->setTitle('DARI')
+            ;
     }
 
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
 
-        yield MenuItem::section('Dynamic Fields');
+        yield MenuItem::section("User's Fields");
 
         yield MenuItem::subMenu('Users','fas fa-user')->setSubItems([
             MenuItem::linkToCrud('Users', 'fas fa-eye', User::class)
@@ -55,7 +56,7 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Advertisement', 'fas fa-eye', Advertisment::class)
         ]);
 
-        yield MenuItem::section('Fixed Fields');
+        yield MenuItem::section("Admin's Fields");
 
         yield MenuItem::subMenu('States','fa-solid fa-flag')->setSubItems([
             MenuItem::linkToCrud('States', 'fas fa-plus', States::class)->setAction(Crud::PAGE_NEW),
