@@ -42,23 +42,31 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')
+                ->setDisabled()
                 ->hideOnForm(),
-            EmailField::new('email'),
-            TextField::new('firstname'),
-            TextField::new('lastname'),
+            EmailField::new('email')
+            ->setDisabled(),
+            TextField::new('firstname')
+                ->setDisabled(),
+            TextField::new('lastname')
+                ->setDisabled(),
             ChoiceField::new('Gender')
+                ->setDisabled()
                 ->setRequired(true)
                 ->setChoices(['MALE','FEMALE','OTHER'])
                 ->setCustomOption('useTranslatableChoices',['MALE','FEMALE','OTHER']),
             DateField::new('BirthDay')
+                ->setDisabled()
                 ->setRequired(true),
             ArrayField::new('roles'),
             ImageField::new('UserImg','Profile Photo')
+                ->setDisabled()
                 ->setRequired(false)
                 ->setBasePath(self::ADVERTISMENT_BASE_PATH)
                 ->setUploadDir(self::ADVERTISMENT_UPLOAD_FOTOS)
                 ->setUploadedFileNamePattern("ProfileFoto".md5(uniqid()).'[randomhash][name].[extension]'),
-            TelephoneField::new('Tel','Phone Number'),
+            TelephoneField::new('Tel','Phone Number')
+                ->setDisabled(),
             DateTimeField::new('createdat','Created At')
                 ->hideOnForm(),
             DateTimeField::new('updatedat','Last Modification')
@@ -75,7 +83,7 @@ class UserCrudController extends AbstractCrudController
 
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        if (($entityInstance instanceof User) && ($entityInstance === $this->getUser()))
+        if ($entityInstance instanceof User) return ;
         parent::deleteEntity($entityManager, $entityInstance);
     }
 
