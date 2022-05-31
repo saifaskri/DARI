@@ -55,19 +55,21 @@ class UserCrudController extends AbstractCrudController
             EmailField::new('email')
                 ->setDisabled(),
             TextField::new('firstname')
+                ->hideOnForm()
                 ->setDisabled(),
             TextField::new('lastname')
+                ->hideOnForm()
                 ->setDisabled(),
-            ChoiceField::new('Gender')
-                ->setDisabled()
-                ->setRequired(true)
-                ->setChoices(['MALE','FEMALE','OTHER'])
-                ->setCustomOption('useTranslatableChoices',['MALE','FEMALE','OTHER']),
+            TextField::new('Gender')
+                ->hideOnForm()
+                ->setDisabled(),
             DateField::new('BirthDay')
+                ->hideOnForm()
                 ->setDisabled()
                 ->setRequired(true),
             ArrayField::new('roles'),
             ImageField::new('UserImg','Profile Photo')
+                ->hideOnForm()
                 ->setDisabled()
                 ->setRequired(false)
                 ->setBasePath(self::ADVERTISMENT_BASE_PATH)

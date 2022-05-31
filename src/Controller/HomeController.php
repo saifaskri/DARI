@@ -8,12 +8,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'home_page')]
-    public function index(): Response
+    #[Route('/', name: 'root')]
+    public function root(): Response
     {
-        return $this->render('home/index.html.twig', [
-        ]);
+        return $this->redirectToRoute('gast_home_page');
     }
+
     #[Route('/home', name: 'gast_home_page')]
     public function gastHomePage(): Response
     {
@@ -21,4 +21,6 @@ class HomeController extends AbstractController
             'test'=>'Testing from gast Home Page',
         ]);
     }
+
+
 }

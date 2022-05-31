@@ -8,7 +8,7 @@
             <div class=" " >
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{path('home_page')}}">Home</a>
+                        <a class="nav-link" href="{{path('gast_home_page')}}">Home</a>
                     </li>
                     {% if is_granted('ROLE_ADMIN') %}
                         <li class="nav-item ">
@@ -22,6 +22,12 @@
                     {% if is_granted('IS_AUTHENTICATED_FULLY') -%}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" >{{ app.user.firstname }} {{ app.user.lastname }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <img style="width: 20px" src="{{asset(image_dir ~ app.user.UserImg )}}" alt="Foto Profile" srcset="">
                         </li>
                     {% else %}
                         <li class="nav-item">
