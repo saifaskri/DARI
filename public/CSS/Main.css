@@ -1,0 +1,87 @@
+*{
+    box-sizing: border-box;
+}
+
+.MyBorder{
+    border: 1px solid black;
+}
+
+.myFlex{
+    display: flex;
+}
+
+.margin-auto{
+    margin: auto;
+}
+
+.MyAdsCard{
+    height: 200px;
+    padding: 0 ;
+}
+
+.myCardImgHead{
+    width: 40%;
+}
+
+.myCardImgHead img{
+    width: 100%;
+    height: 100%;
+    object-fit:fill
+}
+
+.MyOverFlowAndThreePoints{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+h4{
+    width: 100%;
+    height: 32px;
+}
+.myCradInfoBody{
+    position: relative;
+}
+
+.DateField {
+    padding: 0;
+    margin: 0;
+}
+
+.Y-Midell{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.DateField p{
+    padding: 0;
+    margin: 0;
+}
+
+.CardBottom{
+    margin-top: 7px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.PostedBy{
+    padding: 0 !important;
+    width: 170px;
+}
+
+.PostedBy img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.PostedBy p{
+    padding: 0;
+    margin: 0;
+    align-self:flex-end ;
+}
+
+.priceField{
+    margin-right: 5px;
+}

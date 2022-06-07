@@ -69,8 +69,8 @@ class UserCrudController extends AbstractCrudController
                 ->setRequired(true),
             ArrayField::new('roles'),
             ImageField::new('UserImg','Profile Photo')
-                ->hideOnForm()
-                ->setDisabled()
+                /*->hideOnForm()*/
+                /*->setDisabled()*/
                 ->setRequired(false)
                 ->setBasePath(self::ADVERTISMENT_BASE_PATH)
                 ->setUploadDir(self::ADVERTISMENT_UPLOAD_FOTOS)
