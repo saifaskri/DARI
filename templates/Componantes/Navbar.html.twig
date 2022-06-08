@@ -1,0 +1,47 @@
+
+    <nav class="navbar navbar-expand-sm navbar-dark p-2 bg-dark">
+        <a class="navbar-brand" href="#">Logo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between " id="navbarSupportedContent">
+            <div class=" " >
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{path('gast_home_page')}}">Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{path('app_advertisments')}}">All Adse</a>
+                    </li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{path('admin')}}">DashBord</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="">
+                <ul class="navbar-nav mr-auto ">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') -%}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" >{{ app.user.firstname }} {{ app.user.lastname }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <img style="width: 20px" src="{{asset(image_dir ~ app.user.UserImg )}}" alt="Foto Profile" srcset="">
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_login') }}">Sign In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_register') }}">Sign Up</a>
+                        </li>
+                    {%- endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+

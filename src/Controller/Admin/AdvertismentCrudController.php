@@ -69,7 +69,7 @@ AdvertismentCrudController extends AbstractCrudController
                 ->setRequired(false),
             MoneyField::new('price')->setCurrency('TND')
                 ->setRequired(true),
-            ImageField::new('illusttration')->setRequired(true)
+            ImageField::new('illusttration')
                 ->setRequired(false)
                 ->setBasePath(self::ADVERTISMENT_BASE_PATH)
                 ->setUploadDir(self::ADVERTISMENT_UPLOAD_FOTOS)

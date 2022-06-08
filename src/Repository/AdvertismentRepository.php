@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Advertisment;
+use App\MyClasses\AdsFilter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -39,6 +40,42 @@ class AdvertismentRepository extends ServiceEntityRepository
         }
     }
 
+
+    /**
+     * @return Advertisment[] Returns an array of Advertisment objects
+     */
+    public function findByFilters(AdsFilter $adsFilter): array
+    {
+        $query = $this
+            ->createQueryBuilder('a')
+            ->join('a.OwnedBy','OwnedBy')
+            ->join('a.accommodationType','AccommodationType')
+            ->join('a.RentsPeriodation','RentPeriodation')
+            ->join('a.state','States')
+        ;
+        if(!(empty($adsFilter->BareSearch_filter))){
+            $query = $query
+                ->andWhere('OwnedBy.FirstName LIKE :search OR OwnedBy.LastName LIKE :search')
+                ->setParameter(':search', "%{$adsFilter->BareSearch_filter}%");
+        }
+        if(!(empty($adsFilter->Accomodation_filter))){
+            $query = $query
+                ->andWhere('AccommodationType.id IN (:accommodationType)')
+                ->setParameter(':accommodationType', $adsFilter->Accomodation_filter);
+        }
+        if(!(empty($adsFilter->RentPeriodation_filter))){
+            $query = $query
+                ->andWhere('RentPeriodation.id IN (:AcomodationType)')
+                ->setParameter(':AcomodationType', $adsFilter->RentPeriodation_filter);
+        }
+        if(!(empty($adsFilter->States_filter))){
+            $query = $query
+                ->andWhere('States.id IN (:States)')
+                ->setParameter(':States', $adsFilter->States_filter);
+        }
+        return $query->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Advertisment[] Returns an array of Advertisment objects
 //     */
@@ -63,4 +100,8 @@ class AdvertismentRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+
+
 }
