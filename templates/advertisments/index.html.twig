@@ -1,95 +1,100 @@
 {% extends 'base.html.twig' %}
 {% block title %}Advertisments{% endblock %}
 {% block body %}
-            <div class="container">
+            <div class="mt-5 container">
                 <div class="row">
-                    <div class="col-4">
-                        <p>ALl about Filter</p>
+                    <div class="col-md-4 col-lg-2">
+                        <div class="FilterHeading mb-4 d-flex align-items-center">
+                            <p class="p-0 m-0"><b>Filters: </b></p>
+                            <button class="btn btn-danger m-0 mx-2 "><a class="Fix-A-Tag" href="/advertisments">Disable</a></button>
+                        </div>
+                        <div class=" MyAdsFilterForm">
+                            {{ form(FilterForm) }}
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    {% for adv in advertisments %}
-                        <div class="col-lg-12">
-                            {% if  adv.status   %}
-                                <div class="MyAdsCard MyBorder margin-auto col-lg-8 myFlex mb-3">
-                                    <div class="myCardImgHead MyBorder">
-                                        <img class="" src="Uploads/imgs/{{ adv.illusttration }}" alt="" srcset="">
-                                    </div>
-                                    <div class="myCradInfoBody p-2 col-8">
-                                        <h4 class="MainTitre MyOverFlowAndThreePoints">{{ adv.description }}</h4>
-                                        <p class="MyOverFlowAndThreePoints"> {{ adv.accommodationType }} | {{ adv.state }} | Address </p>
-                                        <div class="DateField row text-center">
-                                            {% if adv.ValidityDate is not null %}
-                                                <p class="col-12">{{ adv.AvailibilityDate | date('d-m-Y') }} - {{ adv.ValidityDate | date('d-m-Y') }}</p>
-                                            {% else %}
-                                                <p class="col-12">From {{ adv.AvailibilityDate | date('d-m-Y') }}</p>
-                                            {% endif%}
-                                            {% set difference = date(nowTime).diff(date(adv.UpdatedAt)) %}
-                                            {% set onligneSince = difference %}
-                                                {% if onligneSince.y != 0  %}
-                                                    {% if onligneSince.y == 1  %}
-                                                        <p class="col-12">online {{ onligneSince.y }} Year </p>
-                                                    {% else %}
-                                                        <p class="col-12">online {{ onligneSince.y }} Years </p>
-                                                    {% endif %}
-                                                {% elseif onligneSince.m != 0 and onligneSince.d == 0 %}
-                                                    {% if onligneSince.m == 1  %}
-                                                        <p class="col-12">online {{ onligneSince.m }} Month </p>
-                                                    {% else %}
-                                                        <p class="col-12">online {{ onligneSince.m }} Months </p>
-                                                    {% endif %}
-                                                {% elseif onligneSince.m != 0 and onligneSince.d != 0 %}
-                                                    {% if onligneSince.m == 1  %}
-                                                        {% if onligneSince.d == 1  %}
-                                                            <p class="col-12">online {{ onligneSince.m }} Month and {{ onligneSince.d}} day </p>
-                                                        {% else %}
-                                                            <p class="col-12">online {{ onligneSince.m }} Month and {{ onligneSince.d}} days </p>
-                                                        {% endif %}
-                                                    {% else %}
-                                                        {% if onligneSince.d == 1  %}
-                                                            <p class="col-12">online {{ onligneSince.m }} Months and {{ onligneSince.d}} day </p>
-                                                        {% else %}
-                                                            <p class="col-12">online {{ onligneSince.m }} Months and {{ onligneSince.d}} days </p>
-                                                        {% endif %}
-                                                    {% endif %}
-                                                {% elseif onligneSince.d != 0 %}
-                                                    {% if onligneSince.d == 1  %}
-                                                        <p class="col-12">online {{ onligneSince.d }} Day </p>
-                                                    {% else %}
-                                                        <p class="col-12">online {{ onligneSince.d }} Days </p>
-                                                    {% endif %}
-                                                {% elseif onligneSince.h != 0 %}
-                                                    {% if onligneSince.h == 1  %}
-                                                        <p class="col-12">online {{ onligneSince.h }} Hour </p>
-                                                    {% else %}
-                                                        <p class="col-12">online {{ onligneSince.h }} Hours </p>
-                                                    {% endif %}
-                                                {% elseif onligneSince.i != 0 %}
-                                                    {% if onligneSince.i == 1  %}
-                                                        <p class="col-12">online {{ onligneSince.i }} Minute </p>
-                                                    {% else %}
-                                                        <p class="col-12">online {{ onligneSince.i }} Minutes </p>
-                                                    {% endif %}
-                                                {% elseif onligneSince.s != 0 %}
-                                                    {% if onligneSince.s == 1  %}
-                                                        <p class="col-12">online {{ onligneSince.s }} Seconde </p>
-                                                    {% else %}
-                                                        <p class="col-12">online {{ onligneSince.s }} Secondes </p>
-                                                    {% endif %}
-                                                {% endif %}
-                                        </div>
-                                        <div class="CardBottom d-flex">
-                                            <div class="PostedBy d-flex MyOverFlowAndThreePoints ">
-                                                <img src="Uploads/imgs/{{ adv.OwnedBy.UserImg }}" >
-                                                <p >{{ adv.OwnedBy.FirstName }} {{ adv.OwnedBy.LastName }}</p>
+                        <div class="col-md-8 col-lg-10">
+                            <p class="">ALl Advertisment</p>
+                            {% for adv in advertisments %}
+                                        {% if  adv.status   %}
+                                        <div class="MyAdsCard MyBorder margin-auto col-lg-8 myFlex mb-3">
+                                            <div class="myCardImgHead MyBorder">
+                                                <img class="" src="Uploads/imgs/{{ adv.illusttration }}" alt="" srcset="">
                                             </div>
-                                            <div class="priceField align-self-end">{{ adv.price / 100 }} TND</div>
+                                            <div class="myCradInfoBody p-2 col-8">
+                                                <h4 class="MainTitre MyOverFlowAndThreePoints">{{ adv.description }}</h4>
+                                                <p class="MyOverFlowAndThreePoints"> {{ adv.accommodationType }} | {{ adv.state }} | Address </p>
+                                                <div class="DateField row text-center">
+                                                    {% if adv.ValidityDate is not null %}
+                                                        <p class="col-12">{{ adv.AvailibilityDate | date('d-m-Y') }} - {{ adv.ValidityDate | date('d-m-Y') }}</p>
+                                                    {% else %}
+                                                        <p class="col-12">From {{ adv.AvailibilityDate | date('d-m-Y') }}</p>
+                                                    {% endif%}
+                                                    {% set difference = date(nowTime).diff(date(adv.UpdatedAt)) %}
+                                                    {% set onligneSince = difference %}
+                                                    {% if onligneSince.y != 0  %}
+                                                        {% if onligneSince.y == 1  %}
+                                                            <p class="col-12">online {{ onligneSince.y }} Year </p>
+                                                        {% else %}
+                                                            <p class="col-12">online {{ onligneSince.y }} Years </p>
+                                                        {% endif %}
+                                                    {% elseif onligneSince.m != 0 and onligneSince.d == 0 %}
+                                                        {% if onligneSince.m == 1  %}
+                                                            <p class="col-12">online {{ onligneSince.m }} Month </p>
+                                                        {% else %}
+                                                            <p class="col-12">online {{ onligneSince.m }} Months </p>
+                                                        {% endif %}
+                                                    {% elseif onligneSince.m != 0 and onligneSince.d != 0 %}
+                                                        {% if onligneSince.m == 1  %}
+                                                            {% if onligneSince.d == 1  %}
+                                                                <p class="col-12">online {{ onligneSince.m }} Month and {{ onligneSince.d}} day </p>
+                                                            {% else %}
+                                                                <p class="col-12">online {{ onligneSince.m }} Month and {{ onligneSince.d}} days </p>
+                                                            {% endif %}
+                                                        {% else %}
+                                                            {% if onligneSince.d == 1  %}
+                                                                <p class="col-12">online {{ onligneSince.m }} Months and {{ onligneSince.d}} day </p>
+                                                            {% else %}
+                                                                <p class="col-12">online {{ onligneSince.m }} Months and {{ onligneSince.d}} days </p>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% elseif onligneSince.d != 0 %}
+                                                        {% if onligneSince.d == 1  %}
+                                                            <p class="col-12">online {{ onligneSince.d }} Day </p>
+                                                        {% else %}
+                                                            <p class="col-12">online {{ onligneSince.d }} Days </p>
+                                                        {% endif %}
+                                                    {% elseif onligneSince.h != 0 %}
+                                                        {% if onligneSince.h == 1  %}
+                                                            <p class="col-12">online {{ onligneSince.h }} Hour </p>
+                                                        {% else %}
+                                                            <p class="col-12">online {{ onligneSince.h }} Hours </p>
+                                                        {% endif %}
+                                                    {% elseif onligneSince.i != 0 %}
+                                                        {% if onligneSince.i == 1  %}
+                                                            <p class="col-12">online {{ onligneSince.i }} Minute </p>
+                                                        {% else %}
+                                                            <p class="col-12">online {{ onligneSince.i }} Minutes </p>
+                                                        {% endif %}
+                                                    {% elseif onligneSince.s != 0 %}
+                                                        {% if onligneSince.s == 1  %}
+                                                            <p class="col-12">online {{ onligneSince.s }} Seconde </p>
+                                                        {% else %}
+                                                            <p class="col-12">online {{ onligneSince.s }} Secondes </p>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="CardBottom d-flex">
+                                                    <div class="PostedBy d-flex MyOverFlowAndThreePoints ">
+                                                        <img src="Uploads/imgs/{{ adv.OwnedBy.UserImg }}" >
+                                                        <p >{{ adv.OwnedBy.FirstName }} {{ adv.OwnedBy.LastName }}</p>
+                                                    </div>
+                                                    <div class="priceField align-self-end">{{ adv.price / 100 }} TND</div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                </div>
-                            {% endif %}
-                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                 </div>
             </div>
 {% endblock %}

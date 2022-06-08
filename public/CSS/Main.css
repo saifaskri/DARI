@@ -1,5 +1,15 @@
 *{
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.Fix-A-Tag{
+    text-decoration: none;
+    color: white;
+}
+.Fix-A-Tag:hover{
+    text-decoration: none;
+    color: white;
 }
 
 .MyBorder{
@@ -85,3 +95,13 @@ h4{
 .priceField{
     margin-right: 5px;
 }
+
+/*filter Ads Form*/
+.MyAdsFilterForm form{
+    display: flex;
+}
+.MyAdsFilterForm .MyFilterSubmitBtn{
+    float: right;
+    clear: both;
+}
+
